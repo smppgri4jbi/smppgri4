@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>UJIAN ONLINE SMP PGRI 4</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/98/Kota_Bengkulu.png" type="image/png"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f4f6f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden; /* Mencegah double scrollbar */
+    }
+
+    .iframe-container {
+      width: 100%;
+      height: 100vh;  /* Fallback browser lama */
+      height: 100dvh; /* Dynamic viewport height untuk browser HP */
+      overflow: hidden;
+      position: relative;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Loading overlay jika koneksi lambat */
+    .loading-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .spinner {
+      width: 45px;
+      height: 45px;
+      border: 4px solid #e0e0e0;
+      border-top: 4px solid #1a73e8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 16px;
+      color: #5f6368;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="iframe-container">
+    <!-- Loading indicator -->
+    <div class="loading-screen" id="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Memuat Ujian Online SMP PGRI 4...</div>
+    </div>
+
+    <!-- Frame Google Apps Script -->
+    <iframe
+      id="app"
+      src="https://script.google.com/macros/s/AKfycbxD4q-DV4vWSFK1ClzQ0h4bHK5jPMKAMTly_TMpfOqtFoYAqkKa9mKx1CK_hMaQX4zQ/exec"
+      scrolling="yes"
+      allowfullscreen="true"
+      allow="fullscreen; camera; microphone; display-capture; geolocation;"
+      onload="hideLoading()">
+    </iframe>
+  </div>
+
+  <script>
+    function hideLoading() {
+      const loading = document.getElementById('loading');
+      if (loading) {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 400);
+      }
+    }
+  </script>
+</body>
+</html>
